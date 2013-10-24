@@ -61,7 +61,7 @@ function defineImagesLoaded( EventEmitter, eventie ) {
     }
     // use elem as selector string
     if ( typeof elem === 'string' ) {
-      elem = document.querySelectorAll( elem );
+      elem = document.querySelectorAll ? document.querySelectorAll( elem ) : makeArray($(elem));
     }
 
     this.elements = makeArray( elem );
@@ -106,7 +106,7 @@ function defineImagesLoaded( EventEmitter, eventie ) {
         this.addImage( elem );
       }
       // find children
-      var childElems = elem.querySelectorAll('img');
+      var childElems = elem.querySelectorAll ? elem.querySelectorAll('img') : makeArray($(elem).find('img'));
       // concat childElems to filterFound array
       for ( var j=0, jLen = childElems.length; j < jLen; j++ ) {
         var img = childElems[j];
